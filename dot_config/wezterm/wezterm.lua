@@ -4,6 +4,10 @@ return {
 	color_scheme = 'Catppuccin Mocha',
 	enable_tab_bar = false,
 	font_size = 16.0,
+	font = wezterm.font_with_fallback {
+		'Cascadia Code',
+		'JetBrains Mono',
+	},
 	-- macos_window_background_blur = 40,
 	macos_window_background_blur = 30,
 	
