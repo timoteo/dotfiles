@@ -1,4 +1,5 @@
 #!/bin/sh
+alias v='nvim'
 alias j='z'
 alias f='zi'
 alias g='lazygit'
