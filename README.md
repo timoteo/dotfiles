@@ -9,6 +9,7 @@ To install the dotfiles on a fresh machine, run the following command:
 ```sh
 export GITHUB_USERNAME=timoteo
 sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply $GITHUB_USERNAME
+```
 
 ## Setting up dotfiles
 
