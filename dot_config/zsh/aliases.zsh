@@ -105,9 +105,6 @@ alias mach_java_mode="export SDKMAN_DIR="$HOME/.sdkman" && [[ -s "$HOME/.sdkman/
 
 alias brave="/Applications/Brave\ Browser.app/Contents/MacOS/Brave\ Browser"
 
-alias m="git checkout master"
-alias s="git checkout stable"
-
 if [[ $TERM == "xterm-kitty" ]]; then
   alias ssh="kitty +kitten ssh"
 fi
