@@ -24,7 +24,14 @@ alias cmcd='chezmoi cd'
 
 # Zellij
 alias zels='zellij ls'
-alias zeds='zellij delete-session'
+function zeds() {
+	zellij ls | awk '{ print $1 }' | fzf --ansi | xargs zellij delete-session --force
+}
+function zeas() {
+	local session=$(zellij ls | awk '{ print $1 }' | fzf --ansi)
+	echo "Attaching to session $session"
+	zellij attach $session
+}
 
 # Dirs
 alias ..='cd ..'
