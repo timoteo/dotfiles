@@ -51,6 +51,24 @@ alias j11="export JAVA_HOME=`/usr/libexec/java_home -v 11`; java -version"
 alias j17="export JAVA_HOME=`/usr/libexec/java_home -v 17`; java -version"
 alias j19="export JAVA_HOME=`/usr/libexec/java_home -v 19`; java -version"
 
+# Ranger
+function ranger {
+	local IFS=$'\t\n'
+	local tempfile="$(mktemp -t tmp.XXXXXX)"
+	local ranger_cmd=(
+		command
+		ranger
+		--cmd="map Q chain shell echo %d > "$tempfile"; quitall"
+	)
+
+	${ranger_cmd[@]} "$@"
+	if [[ -f "$tempfile" ]] && [[ "$(cat -- "$tempfile")" != "$(echo -n `pwd`)" ]]; then
+		cd -- "$(cat "$tempfile")" || return
+	fi
+	command rm -f -- "$tempfile" 2>/dev/null
+}
+alias rr='ranger'
+
 # Colorize grep output (good for log files)
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
