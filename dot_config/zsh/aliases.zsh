@@ -1,11 +1,11 @@
 #!/bin/sh
+
+# Vim
 alias v='nvim'
 alias j='z'
 alias f='zi'
-alias g='lazygit'
 alias zsh-update-plugins="find "$ZDOTDIR/plugins" -type d -exec test -e '{}/.git' ';' -print0 | xargs -I {} -0 git -C {} pull -q"
-alias nvimrc='nvim ~/.config/nvim/'
-alias yay="paru"
+
 
 # alias lvim='nvim -u ~/.local/share/lunarvim/lvim/init.lua --cmd "set runtimepath+=~/.local/share/lunarvim/lvim"'
 
@@ -15,9 +15,35 @@ alias mirrord="sudo reflector --latest 50 --number 20 --sort delay --save /etc/p
 alias mirrors="sudo reflector --latest 50 --number 20 --sort score --save /etc/pacman.d/mirrorlist"
 alias mirrora="sudo reflector --latest 50 --number 20 --sort age --save /etc/pacman.d/mirrorlist"
 
-# Remarkable
-alias remarkable_ssh='ssh root@10.11.99.1'
-alias restream='restream -p'
+# Chezmoi
+alias cma='chezmoi add'
+alias cme='chezmoi edit'
+alias cmdiff='chezmoi diff'
+alias cmdata='chezmoi data'
+alias cmu='chezmoi update'
+alias cmapp='chezmoi apply'
+alias cmcd='chezmoi cd'
+#
+# Config shortcuts
+alias czsh='chezmoi edit ~/.zshrc'
+alias cnvim='nvim ~/.config/nvim'
+alias calias='chezmoi edit ~/.config/zsh/aliases.zsh'
+alias cexport='chezmoi edit ~/.config/zsh/exports.zsh'
+alias rezsh='source ~/.zshrc'
+alias cwezterm='chezmoi edit ~/.config/wezterm/wezterm.lua'
+alias czellij='chezmoi edit ~/.config/zellij/config.kdl'
+alias cstarship='chezmoi edit ~/.config/starship/starship.toml'
+
+# Git
+alias gc='git commit -m'
+alias gca='git commit --amend -m'
+alias gp='git push'
+alias gpl='git pull'
+alias gs='git status'
+alias ga='git add -p'
+alias gadd='git add'
+alias gdiff='git diff'
+alias glog="git log --graph --topo-order --pretty='%w(100,0,6)%C(yellow)%h%C(bold)%C(black)%d %C(cyan)%ar %C(green)%an%n%C(bold)%C(white)%s %N' --abbrev-commit"
 
 # Java
 alias j8="export JAVA_HOME=`/usr/libexec/java_home -v 1.8`; java -version"
