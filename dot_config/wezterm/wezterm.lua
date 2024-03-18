@@ -3,7 +3,7 @@ return {
 	-- color_scheme = 'termnial.sexy',
 	color_scheme = 'Catppuccin Mocha',
 	enable_tab_bar = false,
-	font_size = 16.0,
+	font_size = 14.0,
 	font = wezterm.font_with_fallback {
 		'Cascadia Code',
 		'JetBrains Mono',
