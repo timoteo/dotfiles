@@ -2,8 +2,6 @@
 
 # Vim
 alias v='nvim'
-alias j='z'
-alias f='zi'
 alias zsh-update-plugins="find "$ZDOTDIR/plugins" -type d -exec test -e '{}/.git' ';' -print0 | xargs -I {} -0 git -C {} pull -q"
 
 
@@ -23,7 +21,18 @@ alias cmdata='chezmoi data'
 alias cmu='chezmoi update'
 alias cmapp='chezmoi apply'
 alias cmcd='chezmoi cd'
-#
+
+# Zellij
+alias zels='zellij ls'
+alias zeds='zellij delete-session'
+
+# Dirs
+alias ..='cd ..'
+alias .2='cd ../..'
+alias .3='cd ../../..'
+alias .4='cd ../../../..'
+alias .5='cd ../../../../..'
+
 # Config shortcuts
 alias czsh='chezmoi edit ~/.zshrc'
 alias cnvim='nvim ~/.config/nvim'
@@ -44,6 +53,19 @@ alias ga='git add -p'
 alias gadd='git add'
 alias gdiff='git diff'
 alias glog="git log --graph --topo-order --pretty='%w(100,0,6)%C(yellow)%h%C(bold)%C(black)%d %C(cyan)%ar %C(green)%an%n%C(bold)%C(white)%s %N' --abbrev-commit"
+
+alias http='xh'
+
+# Eza
+alias l="eza -l --icons --git -a"
+alias lt="eza --tree --level=2 --long --icons --git"
+
+# Navigation
+cx() { cd "$@" && l; }
+fcd() { cd "$(find . -type d -not -path '*/.*' | fzf)" && l; }
+f() { echo "$(find . -type f -not -path '*/.*' | fzf)" | pbcopy }
+fv() { nvim "$(find . -type f -not -path '*/.*' | fzf)" }
+fev() { nvim "$(fd . --type f -e $1 | fzf)" }
 
 # Java
 alias j8="export JAVA_HOME=`/usr/libexec/java_home -v 1.8`; java -version"

@@ -11,17 +11,26 @@ plug "$HOME/.config/zsh/exports.zsh"
 
 # plugins
 plug "esc/conda-zsh-completion"
+# Suggest commands based on history
 plug "zsh-users/zsh-autosuggestions"
+# A simple plugin that auto-closes, deletes and skips over matching delimiters in zsh intelligently. Hopefully.
 plug "hlissner/zsh-autopair"
+# Menu autocompletion
 plug "zap-zsh/supercharge"
 #plug "zap-zsh/vim"
 #plug "zap-zsh/zap-prompt"
+# Init fzf completions and keybinds 
 plug "zap-zsh/fzf"
+# Replaces ls with exa
 plug "zap-zsh/exa"
+# Fish-like syntax highlighting
 plug "zsh-users/zsh-syntax-highlighting"
+# Replace zsh's default completion selection menu with fzf!
 plug "aloxaf/fzf-tab"
 #plug "freed-wu/fzf-tab-source"
 plug "timoohara/zsh-aws"
+# Load after zsh-autosuggestions and zsh-syntax-highlighting
+# Friendly bindings for zsh's vi mode
 plug "softmoth/zsh-vim-mode"
 
 # keybinds
