@@ -13,15 +13,16 @@ sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply $GITHUB_USERNAME
 
 ## Setting up dotfiles
 
-In order to add new dotfile(s) to be managed by chezmoi, run the following command:
+In order to add new dotfile(s) to be managed by chezmoi, run the following commands:
 
 ```sh
+cd
 # assume a number of files exist under .config/newapp that represents new dotfiles
 chezmoi add .config/newapp
 # go to the git dotfiles repo directory
 chezmoi cd
 git add .config/newapp
-git commit -m "Update .zshrc"
+git commit -m "Add config for newapp"
 git push
 ```
 
