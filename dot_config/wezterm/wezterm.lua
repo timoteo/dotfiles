@@ -22,13 +22,14 @@ return {
 	-- window_background_opacity = 0.78,
 	-- window_background_opacity = 0.20,
 	window_decorations = 'RESIZE',
-	keys = {
-		{
-			key = 'f',
-			mods = 'CTRL',
-			action = wezterm.action.ToggleFullScreen,
-		},
-	},
+	-- Commenting out because of overlap with standard vim bindings
+	-- keys = {
+	-- 	{
+	-- 		key = 'f',
+	-- 		mods = 'CTRL',
+	-- 		action = wezterm.action.ToggleFullScreen,
+	-- 	},
+	-- },
 	mouse_bindings = {
 	  -- Ctrl-click will open the link under the mouse cursor
 	  {

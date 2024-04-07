@@ -25,12 +25,12 @@ alias cmcd='chezmoi cd'
 # Zellij
 alias zels='zellij ls'
 function zeds() {
-	zellij ls | awk '{ print $1 }' | fzf --ansi | xargs zellij delete-session --force
+    zellij ls | awk '{ print $1 }' | fzf --ansi | xargs zellij delete-session --force
 }
 function zeas() {
-	local session=$(zellij ls | awk '{ print $1 }' | fzf --ansi)
-	echo "Attaching to session $session"
-	zellij attach $session
+    local session=$(zellij ls | awk '{ print $1 }' | fzf --ansi)
+    echo "Attaching to session $session"
+    zellij attach $session
 }
 
 # Dirs
@@ -61,6 +61,74 @@ alias gadd='git add'
 alias gdiff='git diff'
 alias glog="git log --graph --topo-order --pretty='%w(100,0,6)%C(yellow)%h%C(bold)%C(black)%d %C(cyan)%ar %C(green)%an%n%C(bold)%C(white)%s %N' --abbrev-commit"
 
+function open_url() {
+    if [ $# -ne 1 ]; then
+        echo "Usage: open_url <url>"
+        return 1
+    fi
+    
+    if command -v xdg-open &> /dev/null; then
+        xdg-open "$1"
+    elif command -v open &> /dev/null; then
+        open "$1"
+    elif [ -n "$BROWSER" ]; then
+        "$BROWSER" "$1"
+    else
+        echo "URL: $pr_url"
+        echo "Please open the URL in your browser."
+    fi
+}
+
+function gfeat() {
+    if [ "$#" -ne 1 ]; then
+        echo "Usage: gfeat <feature-name>"
+        return 1
+    fi
+
+    # Define the feature branch name
+    local feature_branch="feature/$1"
+
+    # Ensure the current directory is a Git repository
+    if ! git rev-parse --git-dir > /dev/null 2>&1; then
+        echo "Error: must be run in a Git repository"
+        return 1
+    fi
+
+    # Switch to the develop branch
+    git checkout develop
+
+    # Pull the latest changes
+    git pull origin develop
+
+    # Create and switch to the new feature branch
+    git checkout -b "$feature_branch"
+
+    # Push the new feature branch to the remote origin and set upstream
+    git push -u origin "$feature_branch"
+}
+
+function gfeatpr {
+    if [ $# -lt 2 ]; then
+        echo "Usage: gfeatpr <title> <body>"
+        return 1
+    fi
+
+    # Extract title and body from the command line arguments
+    local title="$1"
+    local body="$2"
+
+    # Create a pull request with 'gh' CLI and capture the output
+    local pr_url=$(gh pr create --base develop --title "$title" --body "$body")
+
+    if [ -z "$pr_url" ]; then
+        echo "Failed to create PR"
+        return 1
+    fi
+
+    echo "Pull Request created: $pr_url"
+    open_url "$pr_url"
+}
+
 alias http='xh'
 
 # Eza
@@ -74,6 +142,18 @@ f() { echo "$(find . -type f -not -path '*/.*' | fzf)" | pbcopy }
 fv() { nvim "$(find . -type f -not -path '*/.*' | fzf)" }
 fev() { nvim "$(fd . --type f -e $1 | fzf)" }
 
+function touchd() {
+  local file_path="$1"
+  if [ -n "$file_path" ]; then
+    local dir_path=$(dirname "$file_path")
+    mkdir -p "$dir_path" && touch "$file_path"
+    echo "Created file: $file_path"
+  else
+    echo "Please provide a file path as an argument."
+    return 1
+  fi
+}
+
 # Java
 alias j8="export JAVA_HOME=`/usr/libexec/java_home -v 1.8`; java -version"
 alias j11="export JAVA_HOME=`/usr/libexec/java_home -v 11`; java -version"
@@ -82,19 +162,19 @@ alias j19="export JAVA_HOME=`/usr/libexec/java_home -v 19`; java -version"
 
 # Ranger
 function ranger {
-	local IFS=$'\t\n'
-	local tempfile="$(mktemp -t tmp.XXXXXX)"
-	local ranger_cmd=(
-		command
-		ranger
-		--cmd="map Q chain shell echo %d > "$tempfile"; quitall"
-	)
+    local IFS=$'\t\n'
+    local tempfile="$(mktemp -t tmp.XXXXXX)"
+    local ranger_cmd=(
+        command
+        ranger
+        --cmd="map Q chain shell echo %d > "$tempfile"; quitall"
+    )
 
-	${ranger_cmd[@]} "$@"
-	if [[ -f "$tempfile" ]] && [[ "$(cat -- "$tempfile")" != "$(echo -n `pwd`)" ]]; then
-		cd -- "$(cat "$tempfile")" || return
-	fi
-	command rm -f -- "$tempfile" 2>/dev/null
+    ${ranger_cmd[@]} "$@"
+    if [[ -f "$tempfile" ]] && [[ "$(cat -- "$tempfile")" != "$(echo -n `pwd`)" ]]; then
+        cd -- "$(cat "$tempfile")" || return
+    fi
+    command rm -f -- "$tempfile" 2>/dev/null
 }
 alias rr='ranger'
 
@@ -141,18 +221,18 @@ fi
 case "$(uname -s)" in
 
 Darwin)
-	# echo 'Mac OS X'
-	alias ls='ls -G'
-	;;
+    # echo 'Mac OS X'
+    alias ls='ls -G'
+    ;;
 
 Linux)
-	alias ls='ls --color=auto'
-	;;
+    alias ls='ls --color=auto'
+    ;;
 
 CYGWIN* | MINGW32* | MSYS* | MINGW*)
-	# echo 'MS Windows'
-	;;
+    # echo 'MS Windows'
+    ;;
 *)
-	# echo 'Other OS'
-	;;
+    # echo 'Other OS'
+    ;;
 esac

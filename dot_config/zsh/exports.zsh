@@ -5,7 +5,7 @@ SAVEHIST=1000000
 export EDITOR="nvim"
 #export TERMINAL="kitty"
 export TERMINAL="wezterm"
-export BROWSER="brave"
+export BROWSER="/Applications/Brave\ Browser.app/Contents/MacOS/Brave\ Browser"
 export PATH="$HOME/.local/bin":$PATH
 export MANPAGER='nvim +Man!'
 export MANWIDTH=999
@@ -17,7 +17,7 @@ export PATH="$HOME/.local/share/neovim/bin":$PATH
 export XDG_CURRENT_DESKTOP="Wayland"
 #export PATH="$PATH:./node_modules/.bin"
 eval "$(fnm env)"
-eval "$(zoxide init zsh)"
+eval "$(zoxide init --cmd cd zsh)"
 # eval "`pip completion --zsh`"
 
 

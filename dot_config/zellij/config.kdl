@@ -178,9 +178,10 @@ keybinds clear-defaults=true {
 	shared_except "renametab" "locked" {
 		bind "Alt r" { SwitchToMode "RenameTab"; }
 	}
-	shared_except "tmux" "locked" {
-		bind "Ctrl b" { SwitchToMode "Tmux"; }
-	}
+	// Commenting out cause it conflicts with vim keybindings
+	// shared_except "tmux" "locked" {
+	// 	bind "Ctrl b" { SwitchToMode "Tmux"; }
+	// }
 }
 
 plugins {
