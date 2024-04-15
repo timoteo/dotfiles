@@ -58,16 +58,24 @@ spec "user.illuminate"
 spec "user.gitsigns"
 -- register keybindings in a way that they can then be displayed visually
 spec "user.whichkey"
--- file explorer
 spec "user.nvimtree"
 -- smart commenting over multiple lines, text objects, etc.
 spec "user.comment"
+-- todo comments
+spec "user.todo-comments"
+-- substitutions
+-- This is messing with leap
+-- spec "user.substitute"
+-- surround operations
+spec "user.surround"
+-- nicer looking tab line
+spec "user.bufferline"
 -- statusline
 spec "user.lualine"
 -- move quickly between important buffers
 spec "user.harpoon"
 -- spec "user.neotest"
--- spec "user.autopairs"
+spec "user.autopairs"
 -- git workflow functionality
 spec "user.neogit"
 -- startup screen for neovim
@@ -79,6 +87,8 @@ spec "user.indentline"
 -- spec "user.toggleterm"
 -- fast in-viewport navigation
 spec "user.leap"
+-- auto session management
+spec "user.auto-session"
 -- preview definitions/references etc. with lsps
 spec "user.goto-preview"
 -- auto-folding capabilities
@@ -86,14 +96,16 @@ spec "user.extras.ufo"
 spec "user.extras.modicator"
 -- code completion
 spec "user.extras.codeium"
-spec "user.extras.tabby"
+-- spec "user.extras.tabby"
 -- smooth scrolling
 spec "user.extras.neoscroll"
+-- maximize windows
+spec "user/vim-maximizer"
 -- floating file explorer
 spec "user.extras.oil"
 spec "user.extras.cellular-automaton"
 -- uses lsp to provide statusline enhancements
-spec "user.navic"
+-- spec "user.navic"
 -- used with navic to provide breadcrumbs
 -- spec "user.breadcrumbs"
 spec "user.extras.dropbar"

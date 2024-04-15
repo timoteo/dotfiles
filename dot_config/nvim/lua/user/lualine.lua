@@ -15,8 +15,8 @@ function M.config()
     },
     sections = {
       lualine_a = { { "mode", separator = { left = "", right = "" }, right_padding = 2 } },
-      lualine_b = { "branch", "diff", "diagnostics" },
-      lualine_c = { "diagnostics" },
+      lualine_b = { "filename", "branch", "diff", "diagnostics" },
+      lualine_c = { require("auto-session.lib").current_session_name },
       lualine_x = { "encoding", "fileformat", "filetype" },
       lualine_y = { "progress" },
       lualine_z = { { "location", separator = { left = "", right = "" }, left_padding = 2 } },

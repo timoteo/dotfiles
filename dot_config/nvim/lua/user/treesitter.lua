@@ -2,32 +2,40 @@ local M = {
   "nvim-treesitter/nvim-treesitter",
   dependencies = {
     "apple/pkl-neovim",
-    "nvim-treesitter/nvim-treesitter-textobjects"
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    "windwp/nvim-ts-autotag",
   },
   event = { "BufReadPost", "BufNewFile" },
   build = ":TSUpdate",
 }
 
 function M.config()
-  require("nvim-treesitter.configs").setup {
+  local treesitter = require "nvim-treesitter.configs"
+  treesitter.setup {
     -- Add languages to be installed here that you want installed for treesitter
     ensure_installed = {
-      "go",
-      "lua",
-      "python",
-      "rust",
-      "typescript",
-      "regex",
-      "css",
-      "html",
-      "typescript",
-      "tsx",
+      "astro",
       "bash",
+      "css",
+      "dockerfile",
+      "gitignore",
+      "go",
+      "html",
+      "javascript",
+      "json",
+      "lua",
       "markdown",
       "markdown_inline",
+      "pkl",
+      "python",
+      "regex",
+      "rust",
       "sql",
-      "astro", -- 'pkl'
+      "tsx",
+      "yaml",
+      "typescript",
     },
+    autotag = { enable = true },
     highlight = { enable = true },
     indent = { enable = true },
     incremental_selection = {
@@ -35,8 +43,10 @@ function M.config()
       keymaps = {
         init_selection = "<c-space>",
         node_incremental = "<c-space>",
-        scope_incremental = "<c-s>",
-        node_decremental = "<c-backspace>",
+        -- scope_incremental = "<c-s>",
+        scope_incremental = false,
+        -- node_decremental = "<c-backspace>",
+        node_decremental = "<bs>",
       },
     },
     textobjects = {

@@ -3,7 +3,9 @@ local M = {
   event = { "BufReadPre", "BufNewFile" },
   dependencies = {
     {
-      "folke/neodev.nvim",
+      "hrsh7th/cmp-nvim-lsp",
+      { "antosha417/nvim-lsp-file-operations", config = true },
+      { "folke/neodev.nvim", options = {} },
     },
   },
 }
@@ -17,6 +19,20 @@ local function lsp_keymaps(bufnr)
   keymap(bufnr, "n", "gI", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
   keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
   keymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
+  keymap(
+    bufnr,
+    "n",
+    "<leader>ld",
+    "<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>",
+    { noremap = true, silent = true, desc = "Document Symbols" }
+  )
+  keymap(
+    bufnr,
+    "n",
+    "<leader>lw",
+    "<cmd>lua require('telescope.builtin').lsp_dynamic_workspace_symbols()<CR>",
+    { noremap = true, silent = true, desc = "Workspace Symbols" }
+  )
 end
 
 M.on_attach = function(client, bufnr)
@@ -30,6 +46,16 @@ end
 function M.common_capabilities()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities.textDocument.completion.completionItem.snippetSupport = true
+  return capabilities
+end
+
+-- see: https://github.com/redhat-developer/yaml-language-server/issues/912
+function M.yamlls_capabilities()
+  local capabilities = M.common_capabilities()
+  capabilities.textDocument.foldingRange = {
+    dynamicRegistration = false,
+    lineFoldingOnly = true,
+  }
   return capabilities
 end
 
@@ -117,7 +143,7 @@ function M.config()
   for _, server in pairs(servers) do
     local opts = {
       on_attach = M.on_attach,
-      capabilities = M.common_capabilities(),
+      capabilities = server == "yamlls" and M.yamlls_capabilities() or M.common_capabilities(),
     }
 
     local require_ok, settings = pcall(require, "user.lspsettings." .. server)

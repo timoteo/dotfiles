@@ -1,6 +1,10 @@
 local keymap = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
+local function with_desc(desc)
+  return { noremap = true, silent = true, desc = desc }
+end
+
 keymap("n", "<Space>", "", opts)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
@@ -43,5 +47,13 @@ keymap({ "n", "x" }, "j", "gj", opts)
 keymap({ "n", "x" }, "k", "gk", opts)
 keymap("n", "<leader>w", ":lua vim.wo.wrap = not vim.wo.wrap<CR>", opts)
 
+vim.api.nvim_set_keymap("t", "<C-;>", "<C-\\><C-n>", opts)
 
-vim.api.nvim_set_keymap('t', '<C-;>', '<C-\\><C-n>', opts)
+-- local wk = require "which-key"
+-- wk.register {
+--   ["<leader>sv"] = { "<cmd>vsplit<cr>", "Split vertically" },
+--   ["<leader>sh"] = { "<cmd>split<cr>", "Split horizontally" },
+--   ["<leader>so"] = { "<cmd>only<cr>", "Close other windows" },
+--   ["<leader>se"] = { "<cmd>wincmd =<cr>", "Make windows equal size" },
+--   ["<leader>sx"] = { "<cmd>close<cr>", "Close window" },
+-- }

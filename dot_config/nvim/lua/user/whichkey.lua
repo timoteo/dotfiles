@@ -1,29 +1,38 @@
 local M = {
   "folke/which-key.nvim",
+  event = "VeryLazy",
 }
 
 function M.config()
   local mappings = {
-    q = { "<cmd>confirm q<CR>", "Quit" },
-    h = { "<cmd>nohlsearch<CR>", "NOHL" },
-    [";"] = { "<cmd>tabnew | terminal<CR>", "Term" },
-    v = { "<cmd>vsplit<CR>", "Split" },
+    q = { "<cmd>confirm q<cr>", "Quit" },
+    h = { "<cmd>nohlsearch<cr>", "NOHL" },
+    [";"] = { "<cmd>tabnew | terminal<cr>", "Term" },
+    s = {
+      name = "Split",
+      v = { "<cmd>vsplit<cr>", "Split vertically" },
+      h = { "<cmd>split<cr>", "Split horizontally" },
+      o = { "<cmd>only<cr>", "Close other windows" },
+      e = { "<cmd>wincmd =<cr>", "Make windows equal size" },
+      x = { "<cmd>close<cr>", "Close window" },
+    },
     b = { name = "Buffers" },
     d = { name = "Debug" },
     f = { name = "Find" },
     g = { name = "Git" },
     l = { name = "LSP" },
     p = { name = "Plugins" },
-    t = { name = "Test" },
-    a = {
+    t = {
       name = "Tab",
-      n = { "<cmd>$tabnew<cr>", "New Empty Tab" },
-      N = { "<cmd>tabnew %<cr>", "New Tab" },
-      o = { "<cmd>tabonly<cr>", "Only" },
-      h = { "<cmd>-tabmove<cr>", "Move Left" },
-      l = { "<cmd>+tabmove<cr>", "Move Right" },
+      n = { "<cmd>tabnew<cr>", "Open new tab" },
+      x = { "<cmd>tabclose<cr>", "Close tab" },
+      l = { "<cmd>tabn<cr>", "Next tab" },
+      o = { "<cmd>tabo<cr>", "Close other tabs" },
+      h = { "<cmd>tabp<cr>", "Previous tab" },
+      f = { "<cmd>tabnew %<cr>", "Open current buffer in new tab" },
     },
     T = { name = "Treesitter" },
+    w = { name = "Workspaces" },
   }
 
   local which_key = require "which-key"

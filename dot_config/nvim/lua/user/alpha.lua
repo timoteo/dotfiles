@@ -23,6 +23,11 @@ function M.config()
   }
 
   dashboard.section.buttons.val = {
+    button(
+      "w",
+      icons.ui.Project .. " Find Workspace",
+      ":lua require('auto-session.session-lens').search_session()<CR>"
+    ),
     button("f", icons.ui.Files .. " Find file", ":Telescope find_files <CR>"),
     button("n", icons.ui.NewFile .. " New file", ":ene <BAR> startinsert <CR>"),
     button("p", icons.git.Repo .. " Find project", ":lua require('telescope').extensions.projects.projects()<CR>"),
@@ -32,7 +37,7 @@ function M.config()
     button("q", icons.ui.SignOut .. " Quit", ":qa<CR>"),
   }
   local function footer()
-    return "chrisatmachine.com"
+    return "timothyohara.com"
   end
 
   dashboard.section.footer.val = footer()

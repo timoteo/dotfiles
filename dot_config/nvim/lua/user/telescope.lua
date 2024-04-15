@@ -1,6 +1,11 @@
 local M = {
   "nvim-telescope/telescope.nvim",
-  dependencies = { { "nvim-telescope/telescope-fzf-native.nvim", build = "make", lazy = true } },
+  branch = "0.1.x",
+  dependencies = {
+    "nvim-lua/plenary.nvim",
+    { "nvim-telescope/telescope-fzf-native.nvim", build = "make", lazy = true },
+    "folke/todo-comments.nvim",
+  },
 }
 
 function M.config()
@@ -8,19 +13,19 @@ function M.config()
   wk.register {
     ["<leader>bb"] = { "<cmd>Telescope buffers previewer=false<cr>", "Find" },
     ["<leader>fb"] = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
-    ["<leader>fc"] = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
+    ["<leader>fc"] = { "<cmd>Telescope grep_string<cr>", "Find string under cursor in cwd" },
     ["<leader>ff"] = { "<cmd>Telescope find_files<cr>", "Find files" },
     ["<leader>fp"] = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects" },
-    ["<leader>ft"] = { "<cmd>Telescope live_grep<cr>", "Find Text" },
+    ["<leader>fs"] = { "<cmd>Telescope live_grep<cr>", "Find Text" },
     ["<leader>fh"] = { "<cmd>Telescope help_tags<cr>", "Help" },
     ["<leader>fl"] = { "<cmd>Telescope resume<cr>", "Last Search" },
     ["<leader>fr"] = { "<cmd>Telescope oldfiles<cr>", "Recent File" },
     ["<leader>fm"] = { "<cmd>Telescope keymaps<cr>", "Key mappings" },
+    ["<leader>ft"] = { "<cmd>TodoTelescope theme=dropdown<cr>", "Find Todos" },
   }
 
   local icons = require "user.icons"
   local actions = require "telescope.actions"
-
 
   require("telescope").setup {
     defaults = {
@@ -50,6 +55,7 @@ function M.config()
 
           ["<C-j>"] = actions.move_selection_next,
           ["<C-k>"] = actions.move_selection_previous,
+          ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
         },
         n = {
           ["<esc>"] = actions.close,
@@ -61,16 +67,16 @@ function M.config()
     },
     pickers = {
       live_grep = {
-        theme = "dropdown",
+        -- theme = "dropdown",
       },
 
       grep_string = {
-        theme = "dropdown",
+        -- theme = "dropdown",
       },
 
       find_files = {
         theme = "dropdown",
-        previewer = false,
+        -- previewer = false,
       },
 
       buffers = {
