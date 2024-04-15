@@ -5,6 +5,7 @@
 autoload -Uz bashcompinit && bashcompinit
 autoload -Uz compinit
 compinit
+_comp_options+=(globdots) # Include hidden files
 
 # history
 HISTFILE=~/.zsh_history
@@ -37,6 +38,25 @@ plug "timoohara/zsh-aws"
 # Friendly bindings for zsh's vi mode
 plug "softmoth/zsh-vim-mode"
 
+# This is made possible by zsh-vim-mode
+# Recognized style words: steady, blinking, block, underline, bar
+MODE_CURSOR_VIINS="blinking bar"
+# MODE_CURSOR_VIINS="#00ff00 blinking bar"
+MODE_CURSOR_REPLACE="$MODE_CURSOR_VIINS "
+#MODE_CURSOR_REPLACE="$MODE_CURSOR_VIINS #ff0000"
+MODE_CURSOR_VICMD="block"
+#MODE_CURSOR_VICMD="green block"
+MODE_CURSOR_SEARCH="steady underline"
+# MODE_CURSOR_SEARCH="#ff00ff steady underline"
+MODE_CURSOR_VISUAL="$MODE_CURSOR_VICMD steady bar"
+MODE_CURSOR_VLINE="$MODE_CURSOR_VISUAL"
+#MODE_CURSOR_VLINE="$MODE_CURSOR_VISUAL #00ffff"
+
+# zsh-vim-mode plugin provides a bunch of useful keybinds
+# See: https://github.com/softmoth/zsh-vim-mode/blob/main/zsh-vim-mode.plugin.zsh
+# Some important ones:
+# ^V - edit command line in vi
+
 # keybinds
 bindkey '^ ' autosuggest-accept
 bindkey -M viins '^R' fzf-history-widget 
@@ -67,7 +87,7 @@ if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/google-cloud-sdk/
 if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/google-cloud-sdk/completion.zsh.inc"; fi
 
 # bun completions
-[ -s "/Users/timothyohara/.bun/_bun" ] && source "/Users/timothyohara/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"

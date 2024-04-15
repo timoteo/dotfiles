@@ -14,6 +14,8 @@ alias mirrors="sudo reflector --latest 50 --number 20 --sort score --save /etc/p
 alias mirrora="sudo reflector --latest 50 --number 20 --sort age --save /etc/pacman.d/mirrorlist"
 
 # Chezmoi
+# add local files that have changed
+alias cmal="chezmoi status | sed -e 's/MM //' | xargs chezmoi add"
 alias cma='chezmoi add'
 alias cme='chezmoi edit'
 alias cmdiff='chezmoi diff'
@@ -32,6 +34,10 @@ function zeas() {
     echo "Attaching to session $session"
     zellij attach $session
 }
+function zr () { zellij run --name "$*" -- zsh -ic "$*";}
+function zrf () { zellij run --name "$*" --floating -- zsh -ic "$*";}
+function ze () { zellij edit "$*";}
+function zef () { zellij edit --floating "$*";}
 
 # Dirs
 alias ..='cd ..'
