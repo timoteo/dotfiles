@@ -5,15 +5,12 @@ local M = {
 
 function M.config()
   local wk = require "which-key"
-  -- wk.register {
-  --   ["<leader>e"] = { "<cmd>NvimTreeToggle<CR>", "Explorer" },
-  -- }
-
-  local keymap = vim.keymap.set
-  keymap("n", "<leader>ee", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle file Explorer" })
-  keymap("n", "<leader>ef", "<cmd>NvimTreeFocus<CR>", { desc = "Toggle file Explorer on current file" })
-  keymap("n", "<leader>ec", "<cmd>NvimTreeCollapse<CR>", { desc = "Collapse file explorer" })
-  keymap("n", "<leader>er", "<cmd>NvimTreeRefresh<CR>", { desc = "Refresh file Explorer" })
+  wk.register {
+    ["<leader>ee"] = { "<cmd>NvimTreeToggle<cr>", "Toggle file explorer" },
+    ["<leader>ef"] = { "<cmd>NvimTreeFindFile<cr>", "Toggle file explorer on current file" },
+    ["<leader>ec"] = { "<cmd>NvimTreeCollapse<cr>", "Collapse file explorer" },
+    ["<leader>er"] = { "<cmd>NvimTreeRefresh<cr>", "Refresh file explorer" },
+  }
 
   local icons = require "user.icons"
 
