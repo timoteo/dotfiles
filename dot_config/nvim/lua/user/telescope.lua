@@ -1,6 +1,5 @@
 local M = {
   "nvim-telescope/telescope.nvim",
-  branch = "0.1.x",
   dependencies = {
     "nvim-lua/plenary.nvim",
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make", lazy = true },
@@ -11,11 +10,11 @@ local M = {
 function M.config()
   local wk = require "which-key"
   wk.register {
-    ["<leader>bb"] = { "<cmd>Telescope buffers previewer=false<cr>", "Find" },
-    ["<leader>fb"] = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
+    ["<leader>fb"] = { "<cmd>Telescope buffers<cr>", "Find buffers" },
+    -- ["<leader>fb"] = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
     ["<leader>fc"] = { "<cmd>Telescope grep_string<cr>", "Find string under cursor in cwd" },
     ["<leader>ff"] = { "<cmd>Telescope find_files<cr>", "Find files" },
-    ["<leader>fp"] = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects" },
+    -- ["<leader>fp"] = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects" },
     ["<leader>fs"] = { "<cmd>Telescope live_grep<cr>", "Find Text" },
     ["<leader>fh"] = { "<cmd>Telescope help_tags<cr>", "Help" },
     ["<leader>fl"] = { "<cmd>Telescope resume<cr>", "Last Search" },
@@ -47,12 +46,10 @@ function M.config()
         "--hidden",
         "--glob=!.git/",
       },
-
       mappings = {
         i = {
           ["<C-n>"] = actions.cycle_history_next,
           ["<C-p>"] = actions.cycle_history_prev,
-
           ["<C-j>"] = actions.move_selection_next,
           ["<C-k>"] = actions.move_selection_previous,
           ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
@@ -67,18 +64,15 @@ function M.config()
     },
     pickers = {
       live_grep = {
-        -- theme = "dropdown",
+        theme = "dropdown",
       },
-
       grep_string = {
         -- theme = "dropdown",
       },
-
       find_files = {
         theme = "dropdown",
-        -- previewer = false,
+        previewer = false,
       },
-
       buffers = {
         theme = "dropdown",
         previewer = false,
@@ -92,12 +86,10 @@ function M.config()
           },
         },
       },
-
       planets = {
         show_pluto = true,
         show_moon = true,
       },
-
       colorscheme = {
         enable_preview = true,
       },
