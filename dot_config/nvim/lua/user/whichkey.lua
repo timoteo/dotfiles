@@ -18,6 +18,7 @@ function M.config()
     },
     b = { name = "Buffers" },
     d = { name = "Debug" },
+    e = { name = "Explorer" },
     f = { name = "Find" },
     g = { name = "Git" },
     l = { name = "LSP" },
