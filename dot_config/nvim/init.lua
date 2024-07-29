@@ -109,5 +109,6 @@ spec "user.extras.cellular-automaton"
 -- used with navic to provide breadcrumbs
 -- spec "user.breadcrumbs"
 spec "user.extras.dropbar"
+spec "user.extras.scala"
 
 require "user.lazy"
